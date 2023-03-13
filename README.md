@@ -1,4 +1,4 @@
-"# Projekt-Kompetencyjny-System-rekomendacyjny" 
+Projekt-Kompetencyjny-System-rekomendacyjny
 Skład Grupy:
 Alicja Szydłowska
 Julia Balcer
