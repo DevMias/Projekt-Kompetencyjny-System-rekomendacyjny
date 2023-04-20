@@ -8,6 +8,8 @@ Skład Grupy:<br>
 <li>Jakub Mijas - główny programista backend</li>
 <li>Łukasz Lasowy - główny programista frontend</li>
 </ul>
+
+<br>Nazwa aplikacji: RE: COMMEND<br>
   
 Podział obowiązków:<br>
 https://tulodz-my.sharepoint.com/:x:/g/personal/235992_edu_p_lodz_pl/EcSV2J4s-8dNu_136lpFz1YBIFsfvNGltIc3ne9JzwetIA?e=NbIFnw
