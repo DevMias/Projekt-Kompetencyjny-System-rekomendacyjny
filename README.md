@@ -18,5 +18,5 @@ Zadania do wykonania do dnia 10.05.2023:
 <ul>
 <li>Czyszczenie danych, tj. wybranie odpowiednich kategorii, ocen, produktów, klientów, tak, aby zmniejszyć liczbę danych do 3 MB</li>
 <li>Możliwe udoskonalenie bazy danych, wgranie danych do bazy</li>
-<li>Wstępne zaprogramowanie szkieletu aplikacji *frontend* </li>
+<li>Wstępne zaprogramowanie szkieletu aplikacji - frontend </li>
 </ul>
