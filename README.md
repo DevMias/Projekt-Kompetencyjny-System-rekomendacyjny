@@ -8,15 +8,15 @@ Skład Grupy:<br>
 <li>Jakub Mijas - główny programista backend</li>
 <li>Łukasz Lasowy - główny programista frontend</li>
 </ul>
+
+<b>Nazwa aplikacji: RE: COMMEND</b><br>
   
 Podział obowiązków:<br>
 https://tulodz-my.sharepoint.com/:x:/g/personal/235992_edu_p_lodz_pl/EcSV2J4s-8dNu_136lpFz1YBIFsfvNGltIc3ne9JzwetIA?e=NbIFnw
 
-Zadania do wykonania do dnia 11.04.2023:
+Zadania do wykonania do dnia 10.05.2023:
 <ul>
-<li>Zebranie raportów sprzedażowych w formie .csv</li>
-<li>Przygotowanie wstępnej bazy danych wraz z raportem odnośnie technologii</li>
-<li>Opracowanie wstępne algorytmu rekomendacji na podstawie podobieństwa produktów (wraz z raportem odnośnie technologii/bibliotek)</li>
-<li>Udoskonalenie wstępnego projektu aplikacji</li>
-<li>Wybór technologii i raport z przygotowania implementacji frontendu</li>
+<li>Czyszczenie danych, tj. wybranie odpowiednich kategorii, ocen, produktów, klientów, tak, aby zmniejszyć liczbę danych do 3 MB</li>
+<li>Możliwe udoskonalenie bazy danych, wgranie danych do bazy</li>
+<li>Wstępne zaprogramowanie szkieletu aplikacji - frontend </li>
 </ul>
