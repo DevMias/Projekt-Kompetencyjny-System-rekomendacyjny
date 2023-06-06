@@ -16,7 +16,8 @@ class ChooseRecommendationMethod(Screen):
 
 class LoadingScreen(Screen):
 
-    def start_loading(self):
+    @staticmethod
+    def start_loading():  # tu metoda która będzie bawić się tą rekomendacją
         app = App.get_running_app()
         screen_manager = app.root.ids.screen_manager
         screen_manager.current = 'recommended'

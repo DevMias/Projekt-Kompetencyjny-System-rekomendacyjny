@@ -107,9 +107,22 @@
             size_hint: 1, 0.1
 
         Button:
-            text: 'Start Loading'
-            size_hint: 1, 0.2
+            text: "Rozpocznij rekomendacje"
+            anchor_x: "bottom"
+            anchor_y: "left"
+            size_hint: None, None
+            size: self.texture_size[0] + dp(40), self.texture_size[1] + dp(30)
+            background_color: (0, 0.7, 0.3, 1)
             on_release: root.start_loading()
+
+        Button:
+            text: 'Wróć'
+            anchor_x: "top"
+            anchor_y: "left"
+            size_hint: None, None
+            size: self.texture_size[0] + dp(40), self.texture_size[1] + dp(30)
+            background_color: (0, 0.7, 0.3, 1)
+            on_release: app.root.current = "recommend"
 
 <RecommendedProducts>:
     name: "recommended"
