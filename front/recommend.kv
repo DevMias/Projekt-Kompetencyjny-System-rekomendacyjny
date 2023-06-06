@@ -5,5 +5,14 @@
     Label:
         font_size: 70
         center_x: root.width / 2
-        top: root.top - 50
+        top: root.height - 400
         text: "Witaj w aplikacji RecommendPy!"
+
+    Button:
+        text: "Zaczynamy"
+        on_release: root.button_pressed()
+        center_x: root.width / 2
+        top: root.height / 2
+        size_hint: None, None
+        size: self.texture_size[0] + dp(40), self.texture_size[1] + dp(30)
+        background_color: (0, 0.7, 0.3, 1)

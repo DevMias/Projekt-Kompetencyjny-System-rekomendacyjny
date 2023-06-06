@@ -3,7 +3,9 @@ from kivy.uix.widget import Widget
 
 
 class Welcome(Widget):
-    pass
+
+    def button_pressed(self):
+        pass
 
 
 class RecommendApp(App):
