@@ -200,8 +200,8 @@
         FloatLayout:
 
             Button:
-                text: "Menu główne" #tutaj trzeba wykombinowac sposob aby zresetowac aplikacje
-                on_release: app.root.current = "choose"
+                text: "Menu główne"
+                on_release: app.reset_app()
                 size_hint: .3, .2
                 pos_hint: {'center_x':.2, 'center_y': .2}
                 background_color: (0, 0.7, 0.3, 1)
