@@ -15,12 +15,15 @@ class ChooseRecommendationMethod(Screen):
 
 
 class LoadingScreen(Screen):
-
-    @staticmethod
-    def start_loading():  # tu metoda która będzie bawić się tą rekomendacją
-        app = App.get_running_app()
-        screen_manager = app.root.ids.screen_manager
-        screen_manager.current = 'recommended'
+    def start_loading(self):  # tu metoda która będzie bawić się tą rekomendacją
+        curr = self.ids.prg_bar.value
+        curr += .25
+        self.ids.prg_bar.value = curr
+        self.ids.prg_lab.text = f'{int(curr*100)}% progress'
+        if self.ids.prg_bar.value == 1:
+            app = App.get_running_app()
+            screen_manager = app.root.ids.screen_manager
+            screen_manager.current = 'recommended'
 
 
 class RecommendedProducts(Screen):
