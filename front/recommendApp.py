@@ -1,5 +1,6 @@
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.clock import Clock
 
 
 class Welcome(Screen):
@@ -15,15 +16,20 @@ class ChooseRecommendationMethod(Screen):
 
 
 class LoadingScreen(Screen):
-    def start_loading(self):  # tu metoda która będzie bawić się tą rekomendacją
+    def start_loading(self):
+        Clock.schedule_once(self.update_progress, 1)
+
+    def update_progress(self, dt): #tutaj skrypt do rekomendacji
         curr = self.ids.prg_bar.value
-        curr += .25
+        curr += 0.25
         self.ids.prg_bar.value = curr
-        self.ids.prg_lab.text = f'{int(curr*100)}% progress'
-        if self.ids.prg_bar.value == 1:
+        self.ids.prg_lab.text = f"{int(curr * 100)}% progress"
+
+        if curr < 1.0:
+            Clock.schedule_once(self.update_progress, 1)
+        else:
             app = App.get_running_app()
-            screen_manager = app.root.ids.screen_manager
-            screen_manager.current = 'recommended'
+            app.root.current = "recommended"
 
 
 class RecommendedProducts(Screen):
