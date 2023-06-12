@@ -170,7 +170,32 @@
             size_hint: 1, 0.5
             text: "Zarekomendowane produkty"
 
-        #tutaj slider z rekomendowanymi produktami
+        BoxLayout:
+            orientation: "horizontal"
+            size: root.width, root.height / 2
+
+            FloatLayout:
+
+                Button:
+                    text: '<'
+                    size_hint: .1, .4
+                    pos_hint: {'center_x':.1, 'center_y': .2}
+
+                Widget:
+                    size_hint: .6, .8
+                    pos_hint: {'center_x':.5, 'center_y': .2}
+
+                    canvas:
+                        Color:
+                            rgba: 1, 0, 0, 1
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+
+                Button:
+                    text: '>'
+                    size_hint: .1, .4
+                    pos_hint: {'center_x':.9, 'center_y': .2}
 
         FloatLayout:
 
