@@ -19,7 +19,7 @@ class LoadingScreen(Screen):
     def start_loading(self):
         Clock.schedule_once(self.update_progress, 1)
 
-    def update_progress(self, dt): #tutaj skrypt do rekomendacji
+    def update_progress(self, dt):  #tutaj skrypt do rekomendacji
         curr = self.ids.prg_bar.value
         curr += 0.25
         self.ids.prg_bar.value = curr
