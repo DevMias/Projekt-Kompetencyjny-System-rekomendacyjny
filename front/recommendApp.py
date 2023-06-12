@@ -45,9 +45,10 @@ class RecommendApp(App):
         return WindowManager()
 
     def reset_app(self):  # mam problemik z resetem apki
+        self.root.clear_widgets()
+        self.root.canvas.clear()
         self.stop()
-        self.root = self.build()
-        self.run()
+        return RecommendApp.run(self)
 
 
 if __name__ == '__main__':
