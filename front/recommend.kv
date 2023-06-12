@@ -12,142 +12,140 @@
 <Welcome>:
     name: "welcome"
 
-    AnchorLayout:
+    BoxLayout:
+        orientation: "vertical"
+
         Label:
             font_size: 70
-            anchor_x: "center"
-            anchor_y: "top"
             text: "Witaj w aplikacji RecommendPy!"
+            size_hint: 1, 0.5
 
-        Button:
-            text: "Zaczynamy"
-            on_release: app.root.current = "choose"
-            anchor_x: "center"
-            anchor_y: "center"
-            size_hint: None, None
-            size: self.texture_size[0] + dp(40), self.texture_size[1] + dp(30)
-            background_color: (0, 0.7, 0.3, 1)
+        FloatLayout:
+            Button:
+                text: "Zaczynamy"
+                on_release: app.root.current = "choose"
+                size_hint: .3, .2
+                pos_hint: {'center_x':.5, 'center_y': .5}
+                background_color: (0, 0.7, 0.3, 1)
 
 <ChoosePerson>:
     name: "choose"
 
-    AnchorLayout:
+    BoxLayout:
+        orientation: "vertical"
+
         Label:
             font_size: 50
-            anchor_x: "top"
-            anchor_y: "center"
+            size_hint: 1, 0.5
             text: "Wybierz osobę, której chcesz zarekomendować produkty"
 
-        Button:
-            text: "Potwierdź"
-            on_release: app.root.current = "recommend"
-            anchor_x: "center"
-            anchor_y: "bottom"
-            size_hint: None, None
-            size: self.texture_size[0] + dp(40), self.texture_size[1] + dp(30)
-            background_color: (0, 0.7, 0.3, 1)
+        #Tutaj slider (to jeszcze zrobie ;))
 
-        Button:
-            text: "Wróć"
-            on_release: app.root.current = "welcome"
-            anchor_x: "left"
-            anchor_y: "top"
-            size_hint: None, None
-            size: self.texture_size[0] + dp(40), self.texture_size[1] + dp(30)
-            background_color: (0, 0.7, 0.3, 1)
+        FloatLayout:
+            Button:
+                text: "Wróć"
+                on_release: app.root.current = "welcome"
+                size_hint: .3, .2
+                pos_hint: {'center_x':.2, 'center_y': .2}
+                background_color: (0, 0.7, 0.3, 1)
+
+            Button:
+                text: "Potwierdź"
+                on_release: app.root.current = "recommend"
+                size_hint: .3, .2
+                pos_hint: {'center_x':.8, 'center_y': .2}
+                background_color: (0, 0.7, 0.3, 1)
 
 <ChooseRecommendationMethod>:
     name: "recommend"
 
-    AnchorLayout:
+    BoxLayout:
+        orientation: "vertical"
+
         Label:
             font_size: 50
-            anchor_x: "top"
-            anchor_y: "center"
+            size_hint: 1, 0.5
             text: "Wybierz osobę, której chcesz zarekomendować produkty"
 
-        Button:
-            text: "Podobieństwo między produktami"
-            on_release: app.root.current = "load"
-            anchor_x: "center"
-            anchor_y: "center"
-            size_hint: None, None
-            size: self.texture_size[0] + dp(40), self.texture_size[1] + dp(30)
-            background_color: (0, 0.7, 0.3, 1)
+        FloatLayout:
 
-        Button
-            text: "Podobieństwo między osobami"
-            on_release: app.root.current = "load"
-            anchor_x: "center"
-            anchor_y: "bottom"
-            size_hint: None, None
-            size: self.texture_size[0] + dp(40), self.texture_size[1] + dp(30)
-            background_color: (0, 0.7, 0.3, 1)
+            Button:
+                text: "Podobieństwo między produktami"
+                on_release: app.root.current = "load"
+                size_hint: .3, .4
+                pos_hint: {'center_x':.2, 'center_y': .5}
+                background_color: (0, 0.7, 0.3, 1)
 
-        Button:
-            text: "Wróć"
-            on_release: app.root.current = "choose"
-            anchor_x: "left"
-            anchor_y: "top"
-            size_hint: None, None
-            size: self.texture_size[0] + dp(40), self.texture_size[1] + dp(30)
-            background_color: (0, 0.7, 0.3, 1)
+            Button:
+                text: "Podobieństwo między osobami"
+                on_release: app.root.current = "load"
+                size_hint: .3, .4
+                pos_hint: {'center_x':.8, 'center_y': .5}
+                background_color: (0, 0.7, 0.3, 1)
+
+        FloatLayout:
+
+            Button:
+                text: "Wróć"
+                on_release: app.root.current = "choose"
+                size_hint: .3, .4
+                pos_hint: {'center_x':.5, 'center_y': .5}
+                background_color: (0, 0.7, 0.3, 1)
 
 <LoadingScreen>:
     name: "load"
 
     BoxLayout:
         orientation: 'vertical'
-        padding: dp(20)
 
-        ProgressBar:
-            id: loading_bar
-            max: 100
-            value: 0
-            size_hint: 1, 0.1
-
-        Button:
+        Label:
+            font_size: 50
+            size_hint: 1, 0.5
             text: "Rozpocznij rekomendacje"
-            anchor_x: "bottom"
-            anchor_y: "left"
-            size_hint: None, None
-            size: self.texture_size[0] + dp(40), self.texture_size[1] + dp(30)
-            background_color: (0, 0.7, 0.3, 1)
-            on_release: root.start_loading()
 
-        Button:
-            text: 'Wróć'
-            anchor_x: "top"
-            anchor_y: "left"
-            size_hint: None, None
-            size: self.texture_size[0] + dp(40), self.texture_size[1] + dp(30)
-            background_color: (0, 0.7, 0.3, 1)
-            on_release: app.root.current = "recommend"
+        #tutaj progressBar
+
+        FloatLayout:
+
+            Button:
+                text: "Wróć"
+                size_hint: .3, .2
+                pos_hint: {'center_x':.2, 'center_y': .2}
+                background_color: (0, 0.7, 0.3, 1)
+                on_release: app.root.current = "recommend"
+
+            Button:
+                text: 'Rozpocznij rekomendacje'
+                size_hint: .3, .2
+                pos_hint: {'center_x':.8, 'center_y': .2}
+                background_color: (0, 0.7, 0.3, 1)
+                on_release: root.start_loading()
 
 <RecommendedProducts>:
     name: "recommended"
 
-    AnchorLayout:
+    BoxLayout:
+        orientation: "vertical"
+
         Label:
             font_size: 50
-            anchor_x: "top"
-            anchor_y: "center"
+            size_hint: 1, 0.5
             text: "Zarekomendowane produkty"
 
-        Button:
-            text: "Zamknij"
-            on_release: app.stop()
-            anchor_x: "left"
-            anchor_y: "bottom"
-            size_hint: None, None
-            size: self.texture_size[0] + dp(40), self.texture_size[1] + dp(30)
-            background_color: (0, 0.7, 0.3, 1)
+        #tutaj slider z rekomendowanymi produktami
 
-        Button:
-            text: "Menu główne"
-            on_release: app.root.current = "choose"
-            anchor_x: "right"
-            anchor_y: "bottom"
-            size_hint: None, None
-            size: self.texture_size[0] + dp(40), self.texture_size[1] + dp(30)
-            background_color: (0, 0.7, 0.3, 1)
+        FloatLayout:
+
+            Button:
+                text: "Menu główne"
+                on_release: app.root.current = "choose"
+                size_hint: .3, .2
+                pos_hint: {'center_x':.2, 'center_y': .2}
+                background_color: (0, 0.7, 0.3, 1)
+
+            Button:
+                text: "Zamknij"
+                on_release: app.stop()
+                size_hint: .3, .2
+                pos_hint: {'center_x':.8, 'center_y': .2}
+                background_color: (0, 0.7, 0.3, 1)
