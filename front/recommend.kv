@@ -12,6 +12,7 @@
     background_color:(0,0,0,0)
     background_normal: ''
     on_press: self.background_color: (199/255, 21/255, 133/255, 1)
+    font_size: self.width / 10
 
     canvas.before:
         Color:
@@ -45,7 +46,7 @@
                     radius: [10]
 
             Label:
-                font_size: dp(50)
+                font_size: self.width / 20
                 text: "Witaj w aplikacji RE:COMMEND!"
                 size_hint: 1, 0.5
                 color: 0, 0, 0

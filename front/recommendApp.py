@@ -43,10 +43,8 @@ class WindowManager(ScreenManager):
 
 class RecommendApp(App):
     def build(self):
-        Window.size = (600, 600)
-
-        Window.left = (Window.width - Window.size[0] / 2)
-        Window.right = (Window.width - Window.size[0] / 2)
+        Window.minimum_width = 800
+        Window.minimum_height = 600
 
         return WindowManager()
 
