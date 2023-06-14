@@ -11,7 +11,6 @@
 <RoundedButton@Button>:
     background_color:(0,0,0,0)
     background_normal: ''
-    on_press: self.background_color: (199/255, 21/255, 133/255, 1)
     font_size: self.width / 10
 
     canvas.before:
@@ -21,6 +20,19 @@
             size: self.size
             pos: self.pos
             radius: [18]
+
+<ArrowButton@Button>:
+    background_color:(0,0,0,0)
+    background_normal: ''
+    font_size: self.width
+
+    canvas.before:
+        Color:
+            rgba: (236/255, 136/255, 217/255, 1) if self.state == 'normal' else (199/255, 21/255, 133/255, 1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [min(self.width, self.height) / 2]
 
 <Welcome>:
     name: "welcome"
@@ -64,51 +76,55 @@
     BoxLayout:
         orientation: "vertical"
 
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'images/background.png'
+
         Label:
-            font_size: 50
+            font_size: self.width / 30
             size_hint: 1, 0.5
             text: "Wybierz osobę, której chcesz zarekomendować produkty"
+            color: 0, 0, 0
 
         BoxLayout:
             orientation: "horizontal"
 
             FloatLayout:
-                Button:
+                ArrowButton:
                     text: '<'
                     size_hint: .1, .4
                     pos_hint: {'center_x':.1, 'center_y': .2}
 
                 Widget:
-                    size_hint: .6, .8
+                    size_hint: .6, 1.2
                     pos_hint: {'center_x':.5, 'center_y': .2}
 
                     canvas:
                         Color:
-                            rgba: 1, 0, 0, 1
+                            rgba: 1,1,1,.6
                         Rectangle:
                             pos: self.pos
                             size: self.size
 
-                Button:
+                ArrowButton:
                     text: '>'
                     size_hint: .1, .4
                     pos_hint: {'center_x':.9, 'center_y': .2}
 
         FloatLayout:
-            Button:
+            RoundedButton:
                 text: "Wróć"
                 on_release: app.root.current = "welcome"
                 size_hint: .3, .2
                 pos_hint: {'center_x':.2, 'center_y': .2}
-                background_color: (0, 0.7, 0.3, 1)
-                on_press: self.background_color: (199/255, 21/255, 133/255, 1)
 
-            Button:
+            RoundedButton:
                 text: "Potwierdź"
                 on_release: app.root.current = "recommend"
                 size_hint: .3, .2
                 pos_hint: {'center_x':.8, 'center_y': .2}
-                background_color: (0, 0.7, 0.3, 1)
 
 <ChooseRecommendationMethod>:
     name: "recommend"
