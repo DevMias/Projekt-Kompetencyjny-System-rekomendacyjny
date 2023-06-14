@@ -8,6 +8,17 @@
     LoadingScreen:
     RecommendedProducts:
 
+<RoundedButton@Button>
+    background_color:(0,0,0,0)
+    background_normal: ''
+    on_press: self.background_color: (199/255, 21/255, 133/255, 1)
+    canvas.before:
+        Color:
+            rgba: (236/255, 136/255, 217/255, 1) if self.state == 'normal' else (199/255, 21/255, 133/255, 1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [18]
 
 <Welcome>:
     name: "welcome"
@@ -15,19 +26,33 @@
     BoxLayout:
         orientation: "vertical"
         size: root.width, root.height
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'images/background.png'
+        BoxLayout:
+            orientation: "vertical"
+            size: root.width-50, root.height-50
+            canvas.before:
+                Color:
+                    rgba: 1,1,1,.6
+                RoundedRectangle:
+                    pos: 50, 50
+                    size: (root.width-100, root.height-100)
+                    radius: [10]
+            Label:
+                font_size: dp(50)
+                text: "Witaj w aplikacji RE:COMMEND!"
+                size_hint: 1, 0.5
+                color: 0, 0, 0
 
-        Label:
-            font_size: 70
-            text: "Witaj w aplikacji RecommendPy!"
-            size_hint: 1, 0.5
-
-        FloatLayout:
-            Button:
-                text: "Zaczynamy"
-                on_release: app.root.current = "choose"
-                size_hint: .3, .2
-                pos_hint: {'center_x':.5, 'center_y': .5}
-                background_color: (0, 0.7, 0.3, 1)
+            FloatLayout:
+                RoundedButton:
+                    text: "Zaczynamy"
+                    on_release: app.root.current = "choose"
+                    size_hint: .3, .2
+                    pos_hint: {'center_x':.5, 'center_y': .5}
 
 <ChoosePerson>:
     name: "choose"
@@ -75,6 +100,7 @@
                 size_hint: .3, .2
                 pos_hint: {'center_x':.2, 'center_y': .2}
                 background_color: (0, 0.7, 0.3, 1)
+                on_press: self.background_color: (199/255, 21/255, 133/255, 1)
 
             Button:
                 text: "Potwierdź"
@@ -118,7 +144,7 @@
                 on_release: app.root.current = "choose"
                 size_hint: .3, .4
                 pos_hint: {'center_x':.5, 'center_y': .5}
-                background_color: (0, 0.7, 0.3, 1)
+                background_color: (236/255, 136/255, 217/255, 1)
 
 <LoadingScreen>:
     name: "load"
