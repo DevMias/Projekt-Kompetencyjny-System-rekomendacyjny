@@ -8,10 +8,11 @@
     LoadingScreen:
     RecommendedProducts:
 
-<RoundedButton@Button>
+<RoundedButton@Button>:
     background_color:(0,0,0,0)
     background_normal: ''
     on_press: self.background_color: (199/255, 21/255, 133/255, 1)
+
     canvas.before:
         Color:
             rgba: (236/255, 136/255, 217/255, 1) if self.state == 'normal' else (199/255, 21/255, 133/255, 1)
@@ -25,15 +26,16 @@
 
     BoxLayout:
         orientation: "vertical"
-        size: root.width, root.height
+
         canvas.before:
             Rectangle:
                 pos: self.pos
                 size: self.size
                 source: 'images/background.png'
+
         BoxLayout:
             orientation: "vertical"
-            size: root.width-50, root.height-50
+
             canvas.before:
                 Color:
                     rgba: 1,1,1,.6
@@ -41,6 +43,7 @@
                     pos: 50, 50
                     size: (root.width-100, root.height-100)
                     radius: [10]
+
             Label:
                 font_size: dp(50)
                 text: "Witaj w aplikacji RE:COMMEND!"
@@ -59,7 +62,6 @@
 
     BoxLayout:
         orientation: "vertical"
-        size: root.width, root.height
 
         Label:
             font_size: 50
@@ -68,10 +70,8 @@
 
         BoxLayout:
             orientation: "horizontal"
-            size: root.width, root.height / 2
 
             FloatLayout:
-
                 Button:
                     text: '<'
                     size_hint: .1, .4
@@ -114,7 +114,6 @@
 
     BoxLayout:
         orientation: "vertical"
-        size: root.width, root.height
 
         Label:
             font_size: 50
@@ -138,7 +137,6 @@
                 background_color: (0, 0.7, 0.3, 1)
 
         FloatLayout:
-
             Button:
                 text: "Wróć"
                 on_release: app.root.current = "choose"
@@ -151,7 +149,6 @@
 
     BoxLayout:
         orientation: 'vertical'
-        size: root.width, root.height
 
         Label:
             id: prg_lab
@@ -167,7 +164,6 @@
             pos_hint: {'x':.1}
 
         FloatLayout:
-
             Button:
                 text: "Wróć"
                 size_hint: .3, .2
@@ -189,7 +185,6 @@
 
     BoxLayout:
         orientation: "vertical"
-        size: root.width, root.height
 
         Label:
             font_size: 50
@@ -198,10 +193,8 @@
 
         BoxLayout:
             orientation: "horizontal"
-            size: root.width, root.height / 2
 
             FloatLayout:
-
                 Button:
                     text: '<'
                     size_hint: .1, .4
@@ -224,7 +217,6 @@
                     pos_hint: {'center_x':.9, 'center_y': .2}
 
         FloatLayout:
-
             Button:
                 text: "Menu główne"
                 on_release: app.reset_app()

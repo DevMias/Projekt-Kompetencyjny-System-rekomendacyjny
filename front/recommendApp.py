@@ -1,4 +1,5 @@
 from kivy.app import App
+from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.clock import Clock
 
@@ -42,13 +43,15 @@ class WindowManager(ScreenManager):
 
 class RecommendApp(App):
     def build(self):
+        Window.size = (600, 600)
+
+        Window.left = (Window.width - Window.size[0] / 2)
+        Window.right = (Window.width - Window.size[0] / 2)
+
         return WindowManager()
 
     def reset_app(self):  # mam problemik z resetem apki
-        self.root.clear_widgets()
-        self.root.canvas.clear()
         self.stop()
-        return RecommendApp.run(self)
 
 
 if __name__ == '__main__':
