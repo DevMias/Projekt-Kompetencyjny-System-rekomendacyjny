@@ -132,34 +132,50 @@
     BoxLayout:
         orientation: "vertical"
 
-        Label:
-            font_size: 50
-            size_hint: 1, 0.5
-            text: "Wybierz osobę, której chcesz zarekomendować produkty"
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'images/background.png'
 
-        FloatLayout:
+        BoxLayout:
+            orientation: "vertical"
 
-            Button:
-                text: "Podobieństwo między produktami"
-                on_release: app.root.current = "load"
-                size_hint: .3, .4
-                pos_hint: {'center_x':.2, 'center_y': .5}
-                background_color: (0, 0.7, 0.3, 1)
+            canvas.before:
+                Color:
+                    rgba: 1,1,1,.6
+                RoundedRectangle:
+                    pos: 50, 50
+                    size: (root.width-100, root.height-100)
+                    radius: [10]
 
-            Button:
-                text: "Podobieństwo między osobami"
-                on_release: app.root.current = "load"
-                size_hint: .3, .4
-                pos_hint: {'center_x':.8, 'center_y': .5}
-                background_color: (0, 0.7, 0.3, 1)
+            Label:
+                font_size: self.width / 25
+                size_hint: 1, 0.5
+                text: "Wybierz sposób rekomendacji"
+                color: 0, 0, 0
 
-        FloatLayout:
-            Button:
-                text: "Wróć"
-                on_release: app.root.current = "choose"
-                size_hint: .3, .4
-                pos_hint: {'center_x':.5, 'center_y': .5}
-                background_color: (236/255, 136/255, 217/255, 1)
+            FloatLayout:
+                RoundedButton:
+                    text: "Podobieństwo między produktami"
+                    on_release: app.root.current = "load"
+                    size_hint: .4, 0.17
+                    font_size: self.width / 17
+                    pos_hint: {'center_x':.5, 'center_y':.9}
+
+                RoundedButton:
+                    text: "Podobieństwo między osobami"
+                    on_release: app.root.current = "load"
+                    size_hint: .4, 0.17
+                    font_size: self.width / 17
+                    pos_hint: {'center_x':.5, 'center_y': .6}
+
+                RoundedButton:
+                    text: "Wróć"
+                    on_release: app.root.current = "choose"
+                    size_hint: .4, 0.17
+                    font_size: self.width / 17
+                    pos_hint: {'center_x':.5, 'center_y': .3}
 
 <LoadingScreen>:
     name: "load"
