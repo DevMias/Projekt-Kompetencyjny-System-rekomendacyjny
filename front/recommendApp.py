@@ -48,7 +48,7 @@ class RecommendApp(App):
 
         return WindowManager()
 
-    def reset_app(self):  # mam problemik z resetem apki
+    def reset_app(self):
         self.stop()
 
 
