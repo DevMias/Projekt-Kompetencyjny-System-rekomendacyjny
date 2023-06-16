@@ -96,8 +96,11 @@
                     text: '<'
                     size_hint: .1, .4
                     pos_hint: {'center_x':.1, 'center_y': .2}
+                    on_release: carousel.load_previous()
 
-                Widget:
+                Carousel:
+                    id: carousel
+                    direction: "right"
                     size_hint: .6, 1.2
                     pos_hint: {'center_x':.5, 'center_y': .2}
 
@@ -108,10 +111,20 @@
                             pos: self.pos
                             size: self.size
 
+                    AsyncImage:
+                        source: 'http://placehold.it/480x270.png&text=slide-1.png'
+                    AsyncImage:
+                        source: 'http://placehold.it/480x270.png&text=slide-2.png'
+                    AsyncImage:
+                        source: 'http://placehold.it/480x270.png&text=slide-3.png'
+                    AsyncImage:
+                        source: 'http://placehold.it/480x270.png&text=slide-4.png'
+
                 ArrowButton:
                     text: '>'
                     size_hint: .1, .4
                     pos_hint: {'center_x':.9, 'center_y': .2}
+                    on_release: carousel.load_next()
 
         FloatLayout:
             RoundedButton:
@@ -257,8 +270,11 @@
                     text: '<'
                     size_hint: .1, .4
                     pos_hint: {'center_x':.1, 'center_y': .2}
+                    on_release: carousel2.load_previous()
 
-                Widget:
+                Carousel:
+                    id: carousel2
+                    direction: "right"
                     size_hint: .6, 1.2
                     pos_hint: {'center_x':.5, 'center_y': .2}
 
@@ -269,10 +285,20 @@
                             pos: self.pos
                             size: self.size
 
+                    AsyncImage:
+                        source: 'http://placehold.it/480x270.png&text=slide-1.png'
+                    AsyncImage:
+                        source: 'http://placehold.it/480x270.png&text=slide-2.png'
+                    AsyncImage:
+                        source: 'http://placehold.it/480x270.png&text=slide-3.png'
+                    AsyncImage:
+                        source: 'http://placehold.it/480x270.png&text=slide-4.png'
+
                 ArrowButton:
                     text: '>'
                     size_hint: .1, .4
                     pos_hint: {'center_x':.9, 'center_y': .2}
+                    on_release: carousel2.load_next()
 
         FloatLayout:
             RoundedButton:
