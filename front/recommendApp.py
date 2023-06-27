@@ -4,6 +4,15 @@ from kivy.core.window import Window
 from kivy.uix.carousel import Carousel
 from kivy.uix.label import Label
 from kivy.uix.screenmanager import ScreenManager, Screen
+from main import create_remote_db_connection
+
+
+def importUsers():
+    remote_cnxn, remote_cursor = create_remote_db_connection()
+    rows = remote_cursor.execute('select top 50 name, second_name, external_ref from Users').fetchall()
+    remote_cursor.close()
+    remote_cnxn.close()
+    return rows
 
 
 class WindowManager(ScreenManager):
@@ -20,7 +29,7 @@ class ChoosePerson(Screen):
         self.setup_carousel()
 
     def setup_carousel(self):
-        names = ["John", "Emily", "Michael", "Sophia"]
+        names = importUsers()
 
         carousel = Carousel(direction='right')
         carousel.clear_widgets()
@@ -29,7 +38,7 @@ class ChoosePerson(Screen):
         font_size = int(screen_width / 30)
 
         for name in names:
-            label = Label(text=name, font_size=font_size, color=(0, 0, 0, 1))
+            label = Label(text=name[0]+' '+name[1], font_size=font_size, color=(0, 0, 0, 1))
             carousel.add_widget(label)
 
         self.ids.carousel_container.add_widget(carousel)

@@ -47,7 +47,7 @@ users = unique_users[:50]
 
 
 
-file_name = r"C:\Users\MeowMias\Projekt-Kompetencyjny\mean_reviews_recom_score.txt"
+file_name = r"mean_reviews_recom_score.txt"
 
 if os.path.exists(file_name):
     with open(file_name, "r") as file:
