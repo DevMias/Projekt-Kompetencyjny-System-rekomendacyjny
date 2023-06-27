@@ -5,7 +5,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import operator
 import random
 
-with open('modified_reviews.json') as f:
+with open('reviews.json') as f:
     data = json.load(f)
 
 reviews = pd.DataFrame(data)
