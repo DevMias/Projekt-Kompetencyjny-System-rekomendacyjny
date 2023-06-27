@@ -33,6 +33,47 @@ def import_data() -> None:
     cnxn.close()
 
 
+# funkcja importująca produkty do bazy lokalnej
+def import_products() -> None:
+    data = []
+    with open('products.json') as fh:
+        data = json.load(fh)
+
+    cnxn, cursor = create_local_db_connection()
+
+    progress_bar = tqdm(total=len(data))
+
+    counter = 0
+    start_position = 0
+    for line in data:
+        if counter >= start_position:
+            create_product(line, cursor)
+        progress_bar.update(1)
+        counter += 1
+        if counter % 10000 == 0:
+            cnxn.commit()
+    cnxn.commit()
+
+    cursor.close()
+    cnxn.close()
+
+
+# funkcja insertująca produkty do tabeli Products
+def create_product(line: dict, cursor) -> None:
+    external_ref = line['asin']
+    name = line['title']
+
+    try:
+        count = cursor.execute(
+            'insert into Products (external_ref, name) values (?, ?)',
+            external_ref,
+            name
+        ).rowcount
+        assert count == 1
+    except IntegrityError:
+        pass
+
+
 # funkcja przenosząca dane z tabeli Users z bazy lokalnej do bazy zdalnej
 def transfer_users() -> None:
     local_cnxn, local_cursor = create_local_db_connection()
@@ -110,6 +151,49 @@ def transfer_friends() -> None:
             if commit_counter % 10000 == 0:
                 remote_cnxn.commit()
     remote_cnxn.commit()
+
+    local_cursor.close()
+    local_cnxn.close()
+    remote_cursor.close()
+    remote_cnxn.close()
+
+
+# funkcja przenosząca dane z tabeli Products z bazy lokalnej do bazy zdalnej
+def transfer_products() -> None:
+    local_cnxn, local_cursor = create_local_db_connection()
+    remote_cnxn, remote_cursor = create_remote_db_connection()
+
+    total = local_cursor.execute("select count(*) from Products").fetchval()
+    rows = local_cursor.execute('select id, external_ref, name from Products order by id').fetchall()
+
+    progress_bar = tqdm(total=total)
+    commit_counter = 0
+
+    remote_cursor.execute('SET IDENTITY_INSERT Products ON')
+    remote_cursor.fast_executemany = True
+
+    while progress_bar.n < progress_bar.total:
+        data = []
+        max_number_of_cumulative_inserts = 500
+        number_of_collected_inserts = 0
+        for line in rows:
+            data.append(line)
+            number_of_collected_inserts += 1
+            progress_bar.update(1)
+            if number_of_collected_inserts >= max_number_of_cumulative_inserts:
+                try:
+                    remote_cursor.executemany(f'insert into Products (id, external_ref, name) values (?, ?, ?)', data)
+                except Exception as e:
+                    print(e)
+                data = []
+                number_of_collected_inserts = 0
+
+            commit_counter += 1
+            if commit_counter % 10000 == 0:
+                remote_cnxn.commit()
+    remote_cnxn.commit()
+
+    remote_cursor.execute('SET IDENTITY_INSERT Products OFF')
 
     local_cursor.close()
     local_cnxn.close()
@@ -222,6 +306,8 @@ def generate_friends() -> None:
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     # import_data()
+    # import_products()
     # generate_friends()
     # transfer_users()
-    transfer_friends()
+    # transfer_friends()
+    transfer_products()
