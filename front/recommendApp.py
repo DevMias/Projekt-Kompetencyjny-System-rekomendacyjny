@@ -14,7 +14,20 @@ class Welcome(Screen):
 
 
 class ChoosePerson(Screen):
-    pass
+    def build(self):
+        names = ["John", "Emily", "Michael", "Sophia"]
+
+        kv = Builder.load_file('recommend.kv')
+
+        carousel = kv.ids.carousel
+
+        carousel.clear_widgets()
+
+        for name in names:
+            label = Label(text=name, font_size=20, color=(0, 0, 0, 1))
+            carousel.add_widget(label)
+
+        return kv
 
 class ChooseRecommendationMethod(Screen):
     pass
