@@ -305,12 +305,18 @@ def generate_friends() -> None:
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    import_data()
+    # import_data()
     # import_products()
     # generate_friends()
     # transfer_users()
     # transfer_friends()
     # transfer_products()
+    remote_cnxn, remote_cursor = create_remote_db_connection()
+    rows = remote_cursor.execute('select top 50 name, second_name from Users').fetchall()
+    remote_cursor.close()
+    remote_cnxn.close()
+    print(rows)
+
 
 
 

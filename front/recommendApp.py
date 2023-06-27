@@ -56,8 +56,8 @@ class LoadingScreen(Screen):
 
 class RecommendedProducts(Screen):
     def switch_to_first_screen(self):
-        window_manager = App.get_running_app().root
-        window_manager.current = 'welcome'
+        screen_manager = self.manager
+        screen_manager.current = 'welcome'
 
 
 class WindowManager(ScreenManager):
