@@ -1,7 +1,13 @@
 from kivy.app import App
-from kivy.core.window import Window
-from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.clock import Clock
+from kivy.core.window import Window
+from kivy.uix.carousel import Carousel
+from kivy.uix.label import Label
+from kivy.uix.screenmanager import ScreenManager, Screen
+
+
+class WindowManager(ScreenManager):
+    pass
 
 
 class Welcome(Screen):
@@ -9,7 +15,35 @@ class Welcome(Screen):
 
 
 class ChoosePerson(Screen):
-    pass
+    def on_enter(self):
+        self.clear_carousel()
+        self.setup_carousel()
+
+    def setup_carousel(self):
+        names = ["John", "Emily", "Michael", "Sophia"]
+
+        carousel = Carousel(direction='right')
+        carousel.clear_widgets()
+
+        screen_width = Window.width
+        font_size = int(screen_width / 30)
+
+        for name in names:
+            label = Label(text=name, font_size=font_size, color=(0, 0, 0, 1))
+            carousel.add_widget(label)
+
+        self.ids.carousel_container.add_widget(carousel)
+
+    def clear_carousel(self):
+        self.ids.carousel_container.clear_widgets()
+
+    def show_previous(self):
+        carousel = self.ids.carousel_container.children[0]
+        carousel.load_previous()
+
+    def show_next(self):
+        carousel = self.ids.carousel_container.children[0]
+        carousel.load_next()
 
 
 class ChooseRecommendationMethod(Screen):
@@ -38,24 +72,44 @@ class LoadingScreen(Screen):
 
 
 class RecommendedProducts(Screen):
-    def switch_to_first_screen(self, instance):
-        window_manager = App.get_running_app().root
-        window_manager.current = 'welcome'
+    def switch_to_first_screen(self):
+        screen_manager = self.manager
+        screen_manager.current = 'welcome'
 
+    def on_enter(self):
+        self.clear_carousel()
+        self.setup_carousel()
 
-class WindowManager(ScreenManager):
-    pass
+    def setup_carousel(self):
+        names = ["John", "Emily", "Michael", "Sophia"]
+
+        carousel = Carousel(direction='right')
+        carousel.clear_widgets()
+
+        screen_width = Window.width
+        font_size = int(screen_width / 30)
+
+        for name in names:
+            label = Label(text=name, font_size=font_size, color=(0, 0, 0, 1))
+            carousel.add_widget(label)
+
+        self.ids.carousel_container2.add_widget(carousel)
+
+    def clear_carousel(self):
+        self.ids.carousel_container2.clear_widgets()
+
+    def show_previous(self):
+        carousel = self.ids.carousel_container2.children[0]
+        carousel.load_previous()
+
+    def show_next(self):
+        carousel = self.ids.carousel_container2.children[0]
+        carousel.load_next()
 
 
 class RecommendApp(App):
     def build(self):
-        Window.minimum_width = 800
-        Window.minimum_height = 600
-
         return WindowManager()
-
-    def reset_app(self):
-        self.stop()
 
 
 if __name__ == '__main__':

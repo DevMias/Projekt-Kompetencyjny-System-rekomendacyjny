@@ -11,7 +11,7 @@ from tqdm import tqdm
 # import lokalny byl 10 krotnie szybszy niz import do bazy zdalnej
 def import_data() -> None:
     data = []
-    with open('modified_reviews.json') as fh:
+    with open('database/reviews.json') as fh:
         data = json.load(fh)
 
     cnxn, cursor = create_local_db_connection()
@@ -36,7 +36,7 @@ def import_data() -> None:
 # funkcja importująca produkty do bazy lokalnej
 def import_products() -> None:
     data = []
-    with open('products.json') as fh:
+    with open('database/products.json') as fh:
         data = json.load(fh)
 
     cnxn, cursor = create_local_db_connection()
@@ -215,14 +215,14 @@ def create_local_db_connection():
     server = 'localhost'
     database = 'recommendation_system'
     username = 'sa'
-    password = 'julkaJB2001'
+    password = 'praktyka'
     return create_db_connection(server, database, username, password)
 
 
 # funkcja tworząca połączenie do bazy
 def create_db_connection(server: str, database: str, username: str, password: str):
     cnxn = pyodbc.connect(
-        'DRIVER={ODBC Driver 18 for SQL Server};'
+        'DRIVER={ODBC Driver 17 for SQL Server};'
         'SERVER=' + server +
         ';DATABASE=' + database +
         ';ENCRYPT=no;UID=' + username +
@@ -310,4 +310,16 @@ if __name__ == '__main__':
     # generate_friends()
     # transfer_users()
     # transfer_friends()
-    transfer_products()
+    # transfer_products()
+    remote_cnxn, remote_cursor = create_remote_db_connection()
+    rows = remote_cursor.execute('select top 50 name, second_name from Users').fetchall()
+    remote_cursor.close()
+    remote_cnxn.close()
+    print(rows)
+
+
+
+
+
+
+

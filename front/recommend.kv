@@ -72,6 +72,7 @@
 
 <ChoosePerson>:
     name: "choose"
+    id: choose
 
     BoxLayout:
         orientation: "vertical"
@@ -93,38 +94,31 @@
 
             FloatLayout:
                 ArrowButton:
+                    id: left
                     text: '<'
                     size_hint: .1, .4
                     pos_hint: {'center_x':.1, 'center_y': .2}
-                    on_release: carousel.load_previous()
+                    on_release: root.show_previous()
 
-                Carousel:
-                    id: carousel
-                    direction: "right"
+                BoxLayout:
+                    id: carousel_container
                     size_hint: .6, 1.2
                     pos_hint: {'center_x':.5, 'center_y': .2}
 
-                    canvas:
+                    canvas.before:
                         Color:
-                            rgba: 1,1,1,.6
-                        Rectangle:
+                            rgba: 1,1,1,.5
+                        RoundedRectangle:
                             pos: self.pos
                             size: self.size
-
-                    AsyncImage:
-                        source: 'http://placehold.it/480x270.png&text=slide-1.png'
-                    AsyncImage:
-                        source: 'http://placehold.it/480x270.png&text=slide-2.png'
-                    AsyncImage:
-                        source: 'http://placehold.it/480x270.png&text=slide-3.png'
-                    AsyncImage:
-                        source: 'http://placehold.it/480x270.png&text=slide-4.png'
+                            radius: [10]
 
                 ArrowButton:
+                    id: right
                     text: '>'
                     size_hint: .1, .4
                     pos_hint: {'center_x':.9, 'center_y': .2}
-                    on_release: carousel.load_next()
+                    on_release: root.show_next()
 
         FloatLayout:
             RoundedButton:
@@ -138,6 +132,7 @@
                 on_release: app.root.current = "recommend"
                 size_hint: .3, .2
                 pos_hint: {'center_x':.8, 'center_y': .2}
+
 
 <ChooseRecommendationMethod>:
     name: "recommend"
@@ -216,7 +211,7 @@
             Label:
                 id: prg_lab
                 font_size: self.width / 20
-                size_hint: 1, 0.5
+                size_hint: 1, 1.5
                 text: "0% progress"
                 color: 0, 0, 0
 
@@ -230,16 +225,16 @@
             FloatLayout:
                 RoundedButton:
                     text: "Wróć"
-                    size_hint: .3, .2
-                    pos_hint: {'center_x':.2, 'center_y': .3}
+                    size_hint: .3, .3
+                    pos_hint: {'center_x':.25, 'center_y': .6}
                     font_size: self.width / 13
                     on_release: app.root.current = "recommend"
 
                 RoundedButton:
                     id: start_recommend
                     text: 'Rozpocznij rekomendacje'
-                    size_hint: .3, .2
-                    pos_hint: {'center_x':.8, 'center_y': .3}
+                    size_hint: .3, .3
+                    pos_hint: {'center_x':.75, 'center_y': .6}
                     font_size: self.width / 13
                     on_press: root.start_loading()
 
@@ -270,40 +265,31 @@
                     text: '<'
                     size_hint: .1, .4
                     pos_hint: {'center_x':.1, 'center_y': .2}
-                    on_release: carousel2.load_previous()
+                    on_release: root.show_previous()
 
-                Carousel:
-                    id: carousel2
-                    direction: "right"
+                BoxLayout:
+                    id: carousel_container2
                     size_hint: .6, 1.2
                     pos_hint: {'center_x':.5, 'center_y': .2}
 
-                    canvas:
+                    canvas.before:
                         Color:
-                            rgba: 1,1,1,.6
-                        Rectangle:
+                            rgba: 1,1,1,.5
+                        RoundedRectangle:
                             pos: self.pos
                             size: self.size
-
-                    AsyncImage:
-                        source: 'http://placehold.it/480x270.png&text=slide-1.png'
-                    AsyncImage:
-                        source: 'http://placehold.it/480x270.png&text=slide-2.png'
-                    AsyncImage:
-                        source: 'http://placehold.it/480x270.png&text=slide-3.png'
-                    AsyncImage:
-                        source: 'http://placehold.it/480x270.png&text=slide-4.png'
+                            radius: [10]
 
                 ArrowButton:
                     text: '>'
                     size_hint: .1, .4
                     pos_hint: {'center_x':.9, 'center_y': .2}
-                    on_release: carousel2.load_next()
+                    on_release: root.show_next()
 
         FloatLayout:
             RoundedButton:
                 text: "Menu główne"
-                on_press: root.switch_to_first_screen(self)
+                on_press: root.switch_to_first_screen()
                 size_hint: .3, .2
                 pos_hint: {'center_x':.2, 'center_y': .2}
 
