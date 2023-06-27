@@ -1,5 +1,6 @@
 from kivy.app import App
 from kivy.clock import Clock
+from kivy.core.window import Window
 from kivy.uix.carousel import Carousel
 from kivy.uix.label import Label
 from kivy.uix.screenmanager import ScreenManager, Screen
@@ -15,6 +16,7 @@ class Welcome(Screen):
 
 class ChoosePerson(Screen):
     def on_enter(self):
+        self.clear_carousel()
         self.setup_carousel()
 
     def setup_carousel(self):
@@ -23,11 +25,17 @@ class ChoosePerson(Screen):
         carousel = Carousel(direction='right')
         carousel.clear_widgets()
 
+        screen_width = Window.width
+        font_size = int(screen_width / 30)
+
         for name in names:
-            label = Label(text=name, font_size=20, color=(0, 0, 0, 1))
+            label = Label(text=name, font_size=font_size, color=(0, 0, 0, 1))
             carousel.add_widget(label)
 
         self.ids.carousel_container.add_widget(carousel)
+
+    def clear_carousel(self):
+        self.ids.carousel_container.clear_widgets()
 
     def show_previous(self):
         carousel = self.ids.carousel_container.children[0]
