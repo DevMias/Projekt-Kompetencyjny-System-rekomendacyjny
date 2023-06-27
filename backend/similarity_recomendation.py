@@ -38,7 +38,7 @@ def recommend_products(title,cosine):
     index = data[data['title'] == title].index[0]
     dist = list(enumerate(cosine[index]))
     dist.sort(reverse=True, key=lambda x: x[1])
-    for i in dist[1:15]:
+    for i in dist[1:5]:
         similarity_value = i[1]
         print(data.iloc[i[0]]['title'], similarity_value)
 
