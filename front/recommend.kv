@@ -211,7 +211,7 @@
             Label:
                 id: prg_lab
                 font_size: self.width / 20
-                size_hint: 1, 0.5
+                size_hint: 1, 1.5
                 text: "0% progress"
                 color: 0, 0, 0
 
@@ -225,16 +225,16 @@
             FloatLayout:
                 RoundedButton:
                     text: "Wróć"
-                    size_hint: .3, .2
-                    pos_hint: {'center_x':.2, 'center_y': .3}
+                    size_hint: .3, .3
+                    pos_hint: {'center_x':.25, 'center_y': .6}
                     font_size: self.width / 13
                     on_release: app.root.current = "recommend"
 
                 RoundedButton:
                     id: start_recommend
                     text: 'Rozpocznij rekomendacje'
-                    size_hint: .3, .2
-                    pos_hint: {'center_x':.8, 'center_y': .3}
+                    size_hint: .3, .3
+                    pos_hint: {'center_x':.75, 'center_y': .6}
                     font_size: self.width / 13
                     on_press: root.start_loading()
 
