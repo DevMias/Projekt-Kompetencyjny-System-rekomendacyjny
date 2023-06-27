@@ -76,6 +76,36 @@ class RecommendedProducts(Screen):
         window_manager = App.get_running_app().root
         window_manager.current = 'welcome'
 
+    def on_enter(self):
+        self.clear_carousel()
+        self.setup_carousel()
+
+    def setup_carousel(self):
+        names = ["John", "Emily", "Michael", "Sophia"]
+
+        carousel = Carousel(direction='right')
+        carousel.clear_widgets()
+
+        screen_width = Window.width
+        font_size = int(screen_width / 30)
+
+        for name in names:
+            label = Label(text=name, font_size=font_size, color=(0, 0, 0, 1))
+            carousel.add_widget(label)
+
+        self.ids.carousel_container2.add_widget(carousel)
+
+    def clear_carousel(self):
+        self.ids.carousel_container2.clear_widgets()
+
+    def show_previous(self):
+        carousel = self.ids.carousel_container2.children[0]
+        carousel.load_previous()
+
+    def show_next(self):
+        carousel = self.ids.carousel_container2.children[0]
+        carousel.load_next()
+
 
 class RecommendApp(App):
     def build(self):

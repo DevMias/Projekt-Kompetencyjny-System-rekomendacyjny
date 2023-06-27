@@ -265,35 +265,26 @@
                     text: '<'
                     size_hint: .1, .4
                     pos_hint: {'center_x':.1, 'center_y': .2}
-                    on_release: carousel2.load_previous()
+                    on_release: root.show_previous()
 
-                Carousel:
-                    id: carousel2
-                    direction: "right"
+                BoxLayout:
+                    id: carousel_container2
                     size_hint: .6, 1.2
                     pos_hint: {'center_x':.5, 'center_y': .2}
 
-                    canvas:
+                    canvas.before:
                         Color:
-                            rgba: 1,1,1,.6
-                        Rectangle:
+                            rgba: 1,1,1,.5
+                        RoundedRectangle:
                             pos: self.pos
                             size: self.size
-
-                    AsyncImage:
-                        source: 'http://placehold.it/480x270.png&text=slide-1.png'
-                    AsyncImage:
-                        source: 'http://placehold.it/480x270.png&text=slide-2.png'
-                    AsyncImage:
-                        source: 'http://placehold.it/480x270.png&text=slide-3.png'
-                    AsyncImage:
-                        source: 'http://placehold.it/480x270.png&text=slide-4.png'
+                            radius: [10]
 
                 ArrowButton:
                     text: '>'
                     size_hint: .1, .4
                     pos_hint: {'center_x':.9, 'center_y': .2}
-                    on_release: carousel2.load_next()
+                    on_release: root.show_next()
 
         FloatLayout:
             RoundedButton:
