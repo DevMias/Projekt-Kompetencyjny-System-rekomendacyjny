@@ -72,6 +72,7 @@
 
 <ChoosePerson>:
     name: "choose"
+    id: choose
 
     BoxLayout:
         orientation: "vertical"
@@ -93,29 +94,23 @@
 
             FloatLayout:
                 ArrowButton:
+                    id: left
                     text: '<'
                     size_hint: .1, .4
                     pos_hint: {'center_x':.1, 'center_y': .2}
-                    on_release: carousel.load_previous()
+                    on_release: root.show_previous()
 
-                Carousel:
-                    id: carousel
-                    direction: "right"
+                BoxLayout:
+                    id: carousel_container
                     size_hint: .6, 1.2
                     pos_hint: {'center_x':.5, 'center_y': .2}
 
-                    canvas:
-                        Color:
-                            rgba: 1,1,1,.6
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
-
                 ArrowButton:
+                    id: right
                     text: '>'
                     size_hint: .1, .4
                     pos_hint: {'center_x':.9, 'center_y': .2}
-                    on_release: carousel.load_next()
+                    on_release: root.show_next()
 
         FloatLayout:
             RoundedButton:
@@ -129,6 +124,7 @@
                 on_release: app.root.current = "recommend"
                 size_hint: .3, .2
                 pos_hint: {'center_x':.8, 'center_y': .2}
+
 
 <ChooseRecommendationMethod>:
     name: "recommend"
@@ -294,7 +290,7 @@
         FloatLayout:
             RoundedButton:
                 text: "Menu główne"
-                on_press: root.switch_to_first_screen(self)
+                on_press: root.switch_to_first_screen()
                 size_hint: .3, .2
                 pos_hint: {'center_x':.2, 'center_y': .2}
 

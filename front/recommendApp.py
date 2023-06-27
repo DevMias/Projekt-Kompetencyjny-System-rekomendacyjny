@@ -1,12 +1,12 @@
 from kivy.app import App
-from kivy.core.window import Window
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.button import Button
-from kivy.uix.carousel import Carousel
-from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.clock import Clock
+from kivy.uix.carousel import Carousel
 from kivy.uix.label import Label
-from kivy.lang import Builder
+from kivy.uix.screenmanager import ScreenManager, Screen
+
+
+class WindowManager(ScreenManager):
+    pass
 
 
 class Welcome(Screen):
@@ -14,20 +14,29 @@ class Welcome(Screen):
 
 
 class ChoosePerson(Screen):
-    def build(self):
+    def on_enter(self):
+        self.setup_carousel()
+
+    def setup_carousel(self):
         names = ["John", "Emily", "Michael", "Sophia"]
 
-        kv = Builder.load_file('recommend.kv')
-
-        carousel = kv.ids.carousel
-
+        carousel = Carousel(direction='right')
         carousel.clear_widgets()
 
         for name in names:
             label = Label(text=name, font_size=20, color=(0, 0, 0, 1))
             carousel.add_widget(label)
 
-        return kv
+        self.ids.carousel_container.add_widget(carousel)
+
+    def show_previous(self):
+        carousel = self.ids.carousel_container.children[0]
+        carousel.load_previous()
+
+    def show_next(self):
+        carousel = self.ids.carousel_container.children[0]
+        carousel.load_next()
+
 
 class ChooseRecommendationMethod(Screen):
     pass
@@ -60,19 +69,9 @@ class RecommendedProducts(Screen):
         window_manager.current = 'welcome'
 
 
-class WindowManager(ScreenManager):
-    pass
-
-
 class RecommendApp(App):
     def build(self):
-        Window.minimum_width = 800
-        Window.minimum_height = 600
-
         return WindowManager()
-
-    def reset_app(self):
-        self.stop()
 
 
 if __name__ == '__main__':
