@@ -1,4 +1,5 @@
 import json
+import os
 import pandas as pd
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
@@ -43,11 +44,22 @@ def recommend_items(user_id, top_n=5):
 unique_users = reviews['reviewerID'].unique()
 random.shuffle(unique_users)
 users = unique_users[:50]
-scores = []
 
-for user_id in users:
-    recommendations = recommend_items(user_id, top_n=5)
 
-    for item_id, score in recommendations:
-        scores.append(score)
-print("Mean Score:", np.mean(scores))
+
+file_name = r"C:\Users\MeowMias\Projekt-Kompetencyjny\mean_reviews_recom_score.txt"
+
+if os.path.exists(file_name):
+    with open(file_name, "r") as file:
+        mean_value = file.read()
+        print("Zawartość pliku:", mean_value)
+else:
+    scores = []
+    for user_id in users:
+        recommendations = recommend_items(user_id, top_n=5)
+        for item_id, score in recommendations:
+            scores.append(score)
+    mean_score = np.mean(scores)
+    
+    with open(file_name, "w") as file:
+        file.write(str(mean_score))
