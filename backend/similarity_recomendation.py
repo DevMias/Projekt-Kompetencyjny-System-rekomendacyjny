@@ -4,6 +4,31 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
+def get_last_asin_by_reviewer_id(reviewer_id):
+    with open('reviews.json') as f:
+        data = json.load(f)
+        
+    asin_list = []
+    for record in data:
+        if record['reviewerID'] == reviewer_id:
+            asin_list.append(record['asin'])
+    
+    if asin_list:
+        return asin_list[-1]
+    else:
+        return None
+
+def get_product_name(asin):
+    with open('products.json') as f:
+        products = json.load(f)
+    for product in products:
+        if product['asin'] == asin:
+            return product['title']
+    
+    return None
+
+
+
 def recommend_products(product_name, cosine):
     with open('products.json') as f:
         data = json.load(f)
