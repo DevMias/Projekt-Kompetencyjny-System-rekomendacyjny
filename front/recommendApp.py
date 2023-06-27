@@ -1,7 +1,12 @@
 from kivy.app import App
 from kivy.core.window import Window
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.button import Button
+from kivy.uix.carousel import Carousel
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.clock import Clock
+from kivy.uix.label import Label
+from kivy.lang import Builder
 
 
 class Welcome(Screen):
@@ -10,7 +15,6 @@ class Welcome(Screen):
 
 class ChoosePerson(Screen):
     pass
-
 
 class ChooseRecommendationMethod(Screen):
     pass
@@ -38,7 +42,7 @@ class LoadingScreen(Screen):
 
 
 class RecommendedProducts(Screen):
-    def switch_to_first_screen(self, instance):
+    def switch_to_first_screen(self):
         window_manager = App.get_running_app().root
         window_manager.current = 'welcome'
 
