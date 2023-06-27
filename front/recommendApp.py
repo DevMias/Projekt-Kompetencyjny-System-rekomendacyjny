@@ -17,10 +17,14 @@ class ChooseRecommendationMethod(Screen):
 
 
 class LoadingScreen(Screen):
+    def on_pre_enter(self):
+        self.ids.prg_bar.value = 0
+        self.ids.prg_lab.text = "0% progress"
+
     def start_loading(self):
         Clock.schedule_once(self.update_progress, 1)
 
-    def update_progress(self, dt):  # tutaj skrypt do rekomendacji
+    def update_progress(self, dt):
         curr = self.ids.prg_bar.value
         curr += 0.25
         self.ids.prg_bar.value = curr
@@ -34,7 +38,9 @@ class LoadingScreen(Screen):
 
 
 class RecommendedProducts(Screen):
-    pass
+    def switch_to_first_screen(self, instance):
+        window_manager = App.get_running_app().root
+        window_manager.current = 'welcome'
 
 
 class WindowManager(ScreenManager):
