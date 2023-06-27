@@ -1,0 +1,314 @@
+#:kivy 1.0.9
+
+<WindowManager>:
+    id: screen_manager
+    Welcome:
+    ChoosePerson:
+    ChooseRecommendationMethod:
+    LoadingScreen:
+    RecommendedProducts:
+
+<RoundedButton@Button>:
+    background_color:(0,0,0,0)
+    background_normal: ''
+    font_size: self.width / 10
+
+    canvas.before:
+        Color:
+            rgba: (236/255, 136/255, 217/255, 1) if self.state == 'normal' else (199/255, 21/255, 133/255, 1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [18]
+
+<ArrowButton@Button>:
+    background_color:(0,0,0,0)
+    background_normal: ''
+    font_size: self.width
+
+    canvas.before:
+        Color:
+            rgba: (236/255, 136/255, 217/255, 1) if self.state == 'normal' else (199/255, 21/255, 133/255, 1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [min(self.width, self.height) / 2]
+
+<Welcome>:
+    name: "welcome"
+
+    BoxLayout:
+        orientation: "vertical"
+
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'images/background.png'
+
+        BoxLayout:
+            orientation: "vertical"
+
+            canvas.before:
+                Color:
+                    rgba: 1,1,1,.5
+                RoundedRectangle:
+                    pos: 50, 50
+                    size: (root.width-100, root.height-100)
+                    radius: [10]
+
+            Label:
+                font_size: self.width / 20
+                text: "Witaj w aplikacji RE:COMMEND!"
+                size_hint: 1, 0.5
+                color: 0, 0, 0
+
+            FloatLayout:
+                RoundedButton:
+                    text: "Zaczynamy"
+                    on_release: app.root.current = "choose"
+                    size_hint: .3, .2
+                    pos_hint: {'center_x':.5, 'center_y': .5}
+
+<ChoosePerson>:
+    name: "choose"
+
+    BoxLayout:
+        orientation: "vertical"
+
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'images/background.png'
+
+        Label:
+            font_size: self.width / 30
+            size_hint: 1, 0.5
+            text: "Wybierz osobę, której chcesz zarekomendować produkty"
+            color: 0, 0, 0
+
+        BoxLayout:
+            orientation: "horizontal"
+
+            FloatLayout:
+                ArrowButton:
+                    text: '<'
+                    size_hint: .1, .4
+                    pos_hint: {'center_x':.1, 'center_y': .2}
+                    on_release: carousel.load_previous()
+
+                Carousel:
+                    id: carousel
+                    direction: "right"
+                    size_hint: .6, 1.2
+                    pos_hint: {'center_x':.5, 'center_y': .2}
+
+                    canvas:
+                        Color:
+                            rgba: 1,1,1,.6
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+
+                    AsyncImage:
+                        source: 'http://placehold.it/480x270.png&text=slide-1.png'
+                    AsyncImage:
+                        source: 'http://placehold.it/480x270.png&text=slide-2.png'
+                    AsyncImage:
+                        source: 'http://placehold.it/480x270.png&text=slide-3.png'
+                    AsyncImage:
+                        source: 'http://placehold.it/480x270.png&text=slide-4.png'
+
+                ArrowButton:
+                    text: '>'
+                    size_hint: .1, .4
+                    pos_hint: {'center_x':.9, 'center_y': .2}
+                    on_release: carousel.load_next()
+
+        FloatLayout:
+            RoundedButton:
+                text: "Wróć"
+                on_release: app.root.current = "welcome"
+                size_hint: .3, .2
+                pos_hint: {'center_x':.2, 'center_y': .2}
+
+            RoundedButton:
+                text: "Potwierdź"
+                on_release: app.root.current = "recommend"
+                size_hint: .3, .2
+                pos_hint: {'center_x':.8, 'center_y': .2}
+
+<ChooseRecommendationMethod>:
+    name: "recommend"
+
+    BoxLayout:
+        orientation: "vertical"
+
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'images/background.png'
+
+        BoxLayout:
+            orientation: "vertical"
+
+            canvas.before:
+                Color:
+                    rgba: 1,1,1,.6
+                RoundedRectangle:
+                    pos: 50, 50
+                    size: (root.width-100, root.height-100)
+                    radius: [10]
+
+            Label:
+                font_size: self.width / 25
+                size_hint: 1, 0.5
+                text: "Wybierz sposób rekomendacji"
+                color: 0, 0, 0
+
+            FloatLayout:
+                RoundedButton:
+                    text: "Podobieństwo między produktami"
+                    on_release: app.root.current = "load"
+                    size_hint: .4, 0.17
+                    font_size: self.width / 17
+                    pos_hint: {'center_x':.5, 'center_y':.9}
+
+                RoundedButton:
+                    text: "Podobieństwo między osobami"
+                    on_release: app.root.current = "load"
+                    size_hint: .4, 0.17
+                    font_size: self.width / 17
+                    pos_hint: {'center_x':.5, 'center_y': .6}
+
+                RoundedButton:
+                    text: "Wróć"
+                    on_release: app.root.current = "choose"
+                    size_hint: .4, 0.17
+                    font_size: self.width / 17
+                    pos_hint: {'center_x':.5, 'center_y': .3}
+
+<LoadingScreen>:
+    name: "load"
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'images/background.png'
+
+        BoxLayout:
+            orientation: "vertical"
+
+            canvas.before:
+                Color:
+                    rgba: 1,1,1,.6
+                RoundedRectangle:
+                    pos: 50, 50
+                    size: (root.width-100, root.height-100)
+                    radius: [10]
+
+            Label:
+                id: prg_lab
+                font_size: self.width / 20
+                size_hint: 1, 0.5
+                text: "0% progress"
+                color: 0, 0, 0
+
+            ProgressBar:
+                id: prg_bar
+                min: 0
+                max: 1
+                size_hint_x: .8
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+            FloatLayout:
+                RoundedButton:
+                    text: "Wróć"
+                    size_hint: .3, .2
+                    pos_hint: {'center_x':.2, 'center_y': .3}
+                    font_size: self.width / 13
+                    on_release: app.root.current = "recommend"
+
+                RoundedButton:
+                    id: start_recommend
+                    text: 'Rozpocznij rekomendacje'
+                    size_hint: .3, .2
+                    pos_hint: {'center_x':.8, 'center_y': .3}
+                    font_size: self.width / 13
+                    on_press: root.start_loading()
+
+<RecommendedProducts>:
+    name: "recommended"
+    id: recommended
+
+    BoxLayout:
+        orientation: "vertical"
+
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'images/background.png'
+
+        Label:
+            font_size: self.width / 20
+            size_hint: 1, 0.5
+            text: "Zarekomendowane produkty"
+            color: 0, 0, 0
+
+        BoxLayout:
+            orientation: "horizontal"
+
+            FloatLayout:
+                ArrowButton:
+                    text: '<'
+                    size_hint: .1, .4
+                    pos_hint: {'center_x':.1, 'center_y': .2}
+                    on_release: carousel2.load_previous()
+
+                Carousel:
+                    id: carousel2
+                    direction: "right"
+                    size_hint: .6, 1.2
+                    pos_hint: {'center_x':.5, 'center_y': .2}
+
+                    canvas:
+                        Color:
+                            rgba: 1,1,1,.6
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+
+                    AsyncImage:
+                        source: 'http://placehold.it/480x270.png&text=slide-1.png'
+                    AsyncImage:
+                        source: 'http://placehold.it/480x270.png&text=slide-2.png'
+                    AsyncImage:
+                        source: 'http://placehold.it/480x270.png&text=slide-3.png'
+                    AsyncImage:
+                        source: 'http://placehold.it/480x270.png&text=slide-4.png'
+
+                ArrowButton:
+                    text: '>'
+                    size_hint: .1, .4
+                    pos_hint: {'center_x':.9, 'center_y': .2}
+                    on_release: carousel2.load_next()
+
+        FloatLayout:
+            RoundedButton:
+                text: "Menu główne"
+                on_press: root.switch_to_first_screen(self)
+                size_hint: .3, .2
+                pos_hint: {'center_x':.2, 'center_y': .2}
+
+            RoundedButton:
+                text: "Zamknij"
+                on_release: app.stop()
+                size_hint: .3, .2
+                pos_hint: {'center_x':.8, 'center_y': .2}
