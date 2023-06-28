@@ -5,10 +5,11 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 import random
 
+
 def recommend_products(user_id):
     with open('../database/reviews.json') as f:
         data = json.load(f)
-    
+
     with open('../database/products.json') as f_meta:
         meta = json.load(f_meta)
 
@@ -25,7 +26,7 @@ def recommend_products(user_id):
         user_index = tab.index.get_loc(user_id)
         user_similarities = similarity_matrix[user_index]
 
-        top_similar_users = user_similarities.argsort()[::-1][1:top_n+1]
+        top_similar_users = user_similarities.argsort()[::-1][1:top_n + 1]
 
         item_recommendations = {}
 
@@ -71,5 +72,3 @@ def recommend_products(user_id):
         product_name = metadata.loc[metadata['asin'] == item_id, 'title'].values[0]
         results.append((product_name, score))
     return results
-
-

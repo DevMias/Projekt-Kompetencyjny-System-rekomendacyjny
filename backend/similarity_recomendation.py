@@ -4,6 +4,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import sys
 
+
 def get_similarity_recommendations_by_reviewer_id(reviewer_id):
     with open('../database/reviews.json') as f:
         reviews_data = json.load(f)
@@ -35,12 +36,12 @@ def get_similarity_recommendations_by_reviewer_id(reviewer_id):
     return recommendations
 
 # Example usage
-#reviewer_id = 'A1727O77XSE5QQ'
-#recommendations = get_recommendations_by_reviewer_id(reviewer_id)
+# reviewer_id = 'A1727O77XSE5QQ'
+# recommendations = get_recommendations_by_reviewer_id(reviewer_id)
 
-#if recommendations:
+# if recommendations:
 #    print(f"Recommended products for reviewer ID '{reviewer_id}':")
 #    for product, score in recommendations:
 #        print(f"Product: {product}, Score: {score}")
-#else:
+# else:
 #    print(f"No recommendations found for reviewer ID '{reviewer_id}'.")
