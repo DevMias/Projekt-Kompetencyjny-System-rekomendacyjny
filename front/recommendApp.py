@@ -5,6 +5,8 @@ from kivy.uix.carousel import Carousel
 from kivy.uix.label import Label
 from kivy.uix.screenmanager import ScreenManager, Screen
 from main import create_remote_db_connection
+from backend import reviews_recomendation as rev
+from backend import similarity_recomendation as sim
 
 
 def importUsers():
@@ -69,7 +71,7 @@ class LoadingScreen(Screen):
 
     def update_progress(self, dt):
         curr = self.ids.prg_bar.value
-        curr += 0.25
+        curr += 0.1
         self.ids.prg_bar.value = curr
         self.ids.prg_lab.text = f"{int(curr * 100)}% progress"
 

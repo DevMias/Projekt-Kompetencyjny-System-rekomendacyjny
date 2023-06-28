@@ -7,10 +7,10 @@ import operator
 import random
 
 def recommend_products(user_id):
-    with open('reviews.json') as f:
+    with open('../database/reviews.json') as f:
         data = json.load(f)
     
-    with open('products.json') as f_meta:
+    with open('../database/products.json') as f_meta:
         meta = json.load(f_meta)
 
     metadata = pd.DataFrame(meta)
@@ -49,7 +49,7 @@ def recommend_products(user_id):
     random.shuffle(unique_users)
     users = unique_users[:50]
 
-    file_name = r"C:\Users\MeowMias\Projekt-Kompetencyjny\mean_reviews_recom_score.txt"
+    file_name = 'mean_reviews_recom_score.txt'
 
     if os.path.exists(file_name):
         with open(file_name, "r") as file:
