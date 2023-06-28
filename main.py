@@ -222,7 +222,7 @@ def create_local_db_connection():
 # funkcja tworząca połączenie do bazy
 def create_db_connection(server: str, database: str, username: str, password: str):
     cnxn = pyodbc.connect(
-        'DRIVER={ODBC Driver 17 for SQL Server};'
+        'DRIVER={ODBC Driver 18 for SQL Server};'
         'SERVER=' + server +
         ';DATABASE=' + database +
         ';ENCRYPT=no;UID=' + username +

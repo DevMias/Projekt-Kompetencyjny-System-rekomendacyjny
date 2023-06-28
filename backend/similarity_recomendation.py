@@ -1,13 +1,13 @@
 import json
 import pandas as pd
-import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+import sys
 
 def get_similarity_recommendations_by_reviewer_id(reviewer_id):
-    with open('reviews.json') as f:
+    with open('../database/reviews.json') as f:
         reviews_data = json.load(f)
-    with open('products.json') as f:
+    with open('../database/products.json') as f:
         products_data = json.load(f)
 
     reviews = pd.DataFrame(reviews_data)

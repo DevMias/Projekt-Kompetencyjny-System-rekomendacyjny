@@ -128,8 +128,9 @@
                 pos_hint: {'center_x':.2, 'center_y': .2}
 
             RoundedButton:
+                id: submit
                 text: "Potwierdź"
-                on_release: app.root.current = "recommend"
+                on_release: root.submit()
                 size_hint: .3, .2
                 pos_hint: {'center_x':.8, 'center_y': .2}
 
@@ -165,15 +166,17 @@
 
             FloatLayout:
                 RoundedButton:
+                    id: products
                     text: "Podobieństwo między produktami"
-                    on_release: app.root.current = "load"
+                    on_release: root.submit_products_method()
                     size_hint: .4, 0.17
                     font_size: self.width / 17
                     pos_hint: {'center_x':.5, 'center_y':.9}
 
                 RoundedButton:
+                    id: people
                     text: "Podobieństwo między osobami"
-                    on_release: app.root.current = "load"
+                    on_release: root.submit_people_method()
                     size_hint: .4, 0.17
                     font_size: self.width / 17
                     pos_hint: {'center_x':.5, 'center_y': .6}
@@ -236,7 +239,7 @@
                     size_hint: .3, .3
                     pos_hint: {'center_x':.75, 'center_y': .6}
                     font_size: self.width / 13
-                    on_press: root.start_loading()
+                    on_release: root.start_recommendation_thread()
 
 <RecommendedProducts>:
     name: "recommended"
