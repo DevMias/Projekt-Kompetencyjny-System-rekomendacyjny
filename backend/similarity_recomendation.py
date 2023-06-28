@@ -5,7 +5,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 def get_last_asin_by_reviewer_id(reviewer_id):
-    with open('reviews.json') as f:
+    with open('../database/reviews.json') as f:
         data = json.load(f)
         
     asin_list = []
@@ -19,7 +19,7 @@ def get_last_asin_by_reviewer_id(reviewer_id):
         return None
 
 def get_product_name(asin):
-    with open('products.json') as f:
+    with open('../database/products.json') as f:
         products = json.load(f)
     for product in products:
         if product['asin'] == asin:
@@ -30,7 +30,7 @@ def get_product_name(asin):
 
 
 def recommend_products(product_name, cosine):
-    with open('products.json') as f:
+    with open('../database/products.json') as f:
         data = json.load(f)
         
     data = pd.DataFrame(data)
@@ -50,7 +50,7 @@ def recommend_products(product_name, cosine):
     return recommendations
 
 def get_recommendations(product_name):
-    with open('products.json') as f:
+    with open('../database/products.json') as f:
         data = json.load(f)
         
     data = pd.DataFrame(data)
